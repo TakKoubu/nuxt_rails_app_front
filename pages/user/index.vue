@@ -1,6 +1,5 @@
 <template>
   <div class="admin-auth-page">
-    hoggehoge
     <div class="auth-container">
       <form @submit.prevent="onSubmit">
         <AppControlInput type="email" v-model="email">E-Mail</AppControlInput>
