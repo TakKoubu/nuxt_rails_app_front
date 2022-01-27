@@ -2,24 +2,27 @@
   <div>
     <h1>User</h1>
     <p>users:</p>
-    <p>{{ users }}</p>
+    <ul>
+      
+    </ul>
     <button type="submit" @click="fetchUsers()">fetch Users</button>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'IndexPage',
-  data: () => ({
-    users: []
-  }),
+  computed: {
+    ...mapGetters,
+  },
   methods: {
     fetchUsers() {
       console.log('fetchUsersメソッドが呼び出されました！');
       axios
-        .get('http://localhost:3000/users')
+        .get('/api/users')
         .then(response => {
           console.log('.thenが呼び出されました！');
           console.log(response.data);
@@ -28,7 +31,8 @@ export default {
         .catch(error => {
           console.error(error);
         });
-    }
+    },
+    ...mapActions
   }
 }
 </script>
