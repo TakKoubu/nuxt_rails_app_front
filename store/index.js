@@ -20,7 +20,7 @@ const createStore = () => {
       async fetchUsers({ commit }) {
         const response = await axios.get(`${api}/users`);
         commit('setUsers', response.data);
-      }
+      },
     }
   })
 }

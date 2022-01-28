@@ -4,7 +4,7 @@
       <form @submit.prevent="onSubmit">
         <AppControlInput type="email" v-model="email">E-Mail</AppControlInput>
         <AppControlInput type="password" v-model="password">Password</AppControlInput>
-        <AppButton type="submit" @submit="onsubmit">新規登録</AppButton>
+        <AppButton type="submit" @submit="onSubmit">新規登録</AppButton>
       </form>
     </div>
   </div>
