@@ -4,7 +4,13 @@
       <form @submit.prevent="onSubmit">
         <AppControlInput type="email" v-model="email">E-Mail</AppControlInput>
         <AppControlInput type="password" v-model="password">Password</AppControlInput>
-        <AppButton type="submit" @submit="onSubmit">新規登録</AppButton>
+        <AppControlInput type="password" v-model="password_confirmation">(確認用)Password</AppControlInput>
+        <AppButton type="submit">{{ isLogin ? 'Login' : 'Sign Up' }}</AppButton>
+        <AppButton
+          type="button"
+          btn-style="inverted"
+          style="margin-left: 10px"
+          @click="isLogin = !isLogin">Switch to {{ isLogin ? 'Signup' : 'Login' }}</AppButton>
       </form>
     </div>
   </div>
@@ -17,12 +23,14 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      password_confirmation: "",
+      isLogin: true,
     };
   },
   methods: {
     onSubmit() {
-      this.$store.dispatch("signupUser", {
+      this.$store.dispatch("authenticateUser", {
         email: this.email,
         password: this.password
       })
