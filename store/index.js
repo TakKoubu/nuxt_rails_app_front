@@ -39,7 +39,7 @@ const createStore = () => {
           "http://localhost:3000/api/users"
         }
         return this.$axios
-          .$post(authUrl, {
+          .$post('http://localhost:3000/api/users', {
             email: authData.email,
             password: authData.password,
             password_confirmation: authData.password_confirmation,

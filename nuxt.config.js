@@ -1,5 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  server: {
+    port: 8000, 
+  },
   head: {
     title: 'frontend',
     htmlAttrs: {
@@ -39,8 +42,9 @@ export default {
   ],
   proxy: {
     '/api/': { 
-      target: 'http://localhost:3000', 
-      pathRewrite: {'^/api/': '/'} 
+      target: 'http://localhost:3000',
+      pathRewrite: {'^/api/': '/'},
+      changeOrigin: true
     }
   },
 
@@ -60,5 +64,5 @@ export default {
 
     // With options
     ['@nuxtjs/vuetify', { /* module options */ }]
-  ]
+  ],
 }
