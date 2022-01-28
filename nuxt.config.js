@@ -40,6 +40,23 @@ export default {
     '@nuxtjs/auth',
     '@nuxtjs/proxy'
   ],
+  auth: {
+    redirect: {
+      login: '/login',   // 未ログイン時に認証が必要なページにアクセスした際のリダイレクトURL
+      logout: '/login',  // ログアウト時のリダイレクトURL
+      callback: '/callback',   // Oauth認証等で必要となる コールバックルート
+      home: '/memo',         // ログイン後のリダイレクトURL
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/v1/login', method: 'post', propertyName: 'jwt' },
+          user: false,
+          logout: false
+        }
+      },
+    }
+  },
   proxy: {
     '/api/': { 
       target: 'http://localhost:3000',

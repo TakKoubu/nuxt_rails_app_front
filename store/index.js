@@ -11,6 +11,7 @@ const createStore = () => {
   return new Vuex.Store({
     state: {
       users: [],
+      memos: [],
       token: null,
     },
     getters: {
@@ -23,10 +24,15 @@ const createStore = () => {
       },
       clearToken(state) {
         state.token = null;
-      }
+      },
+      setMemos: (state, memos) => (state.memos = memos)
     },
     actions: {
       async fetchUsers({ commit }) {
+        const response = await axios.get(url);
+        commit('setUsers', response.data);
+      },
+      async fetchMemos({ commit }) {
         const response = await axios.get(url);
         commit('setUsers', response.data);
       },
@@ -40,8 +46,7 @@ const createStore = () => {
           .$post(authUrl, { user: {
             email: authData.email,
             password: authData.password,
-            password_confirmation: authData.password_confirmation,
-            returnSecureToken: true }
+            password_confirmation: authData.password_confirmation}
           })
           .then(result => {
             vuexContext.commit("setToken", result.idToken);

@@ -5,7 +5,7 @@
       <AppButton style="margin-left: 10px" @click="onLogout">Logout</AppButton>
     </section>
     <section class="existing-posts">
-      <h1>Existing Posts</h1>
+      <h1>Existing Memos</h1>
     </section>
   </div>
 </template>
@@ -13,7 +13,7 @@
 <script>
 export default {
   layout: "default",
-  // middleware: ["check-auth", "auth"],
+  middleware: ["check-auth", "auth"],
   computed: {
   },
   methods: {

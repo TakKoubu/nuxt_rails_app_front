@@ -10,7 +10,7 @@
       <ul class="nav-list">
         <li class="nav-item"><nuxt-link to="/memo">メモ作成</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/user">新規登録</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/">ログイン</nuxt-link></li> 
+        <li class="nav-item"><nuxt-link to="/login">ログイン</nuxt-link></li> 
       </ul>
     </div>
   </header>
