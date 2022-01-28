@@ -8,7 +8,7 @@
     <div class="spacer"></div>
     <div class="navigation-items">
       <ul class="nav-list">
-        <li class="nav-item"><nuxt-link to="/">メモ作成</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/memo">メモ作成</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/user">新規登録</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/">ログイン</nuxt-link></li> 
       </ul>

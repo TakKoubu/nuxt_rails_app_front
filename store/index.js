@@ -1,12 +1,14 @@
 import axios from 'axios';
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Cookie from "js-cookie";
 
 Vue.use(Vuex);
 
+const url = 'http://localhost:3000/api/users';
+
 const createStore = () => {
   return new Vuex.Store({
-    api: 'http://localhost:3000/api',
     state: {
       users: [],
       token: null,
@@ -25,25 +27,21 @@ const createStore = () => {
     },
     actions: {
       async fetchUsers({ commit }) {
-        const response = await axios.get(`${api}/users`);
+        const response = await axios.get(url);
         commit('setUsers', response.data);
-      },
-      setPosts(vuexContext, posts) {
-        vuexContext.commit("setPosts", posts);
       },
       authenticateUser(vuexContext, authData) {
         let authUrl =
           "http://localhost:3000/api/users" 
         if (!authData.isLogin) {
-          authUrl =
-          "http://localhost:3000/api/users"
+          authUrl = url
         }
         return this.$axios
-          .$post('http://localhost:3000/api/users', {
+          .$post(authUrl, { user: {
             email: authData.email,
             password: authData.password,
             password_confirmation: authData.password_confirmation,
-            returnSecureToken: true
+            returnSecureToken: true }
           })
           .then(result => {
             vuexContext.commit("setToken", result.idToken);
