@@ -25,7 +25,7 @@ export default {
   methods: {
     login() {
       this.$auth.loginWith('local',{
-      data: {
+        data: {
           email: this.email,
           password: this.password
         }

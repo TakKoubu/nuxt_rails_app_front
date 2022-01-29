@@ -17,7 +17,6 @@ const createStore = () => {
       users: state => state.users
     },
     mutations: {
-      setUsers: (state, users) => (state.users = users),
       setToken(state, token) {
         state.token = token;
       },
@@ -27,10 +26,6 @@ const createStore = () => {
       setMemos: (state, memos) => (state.memos = memos)
     },
     actions: {
-      async fetchUsers({ commit }) {
-        const response = await axios.get(url);
-        commit('setUsers', response.data);
-      },
       async fetchMemos({ commit }) {
         const response = await axios.get(url);
         commit('setUsers', response.data);
