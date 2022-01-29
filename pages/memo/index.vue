@@ -13,7 +13,7 @@
 <script>
 export default {
   layout: "default",
-  middleware: ["check-auth", "auth"],
+  middleware: ["auth"],
   computed: {
   },
   methods: {
