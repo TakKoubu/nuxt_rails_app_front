@@ -24,17 +24,17 @@ export default {
   },
   methods: {
     login() {
-        this.$auth.loginWith('local',{
-        data: {
-              email: this.email,
-              password: this.password
-          }
-        }).then((response) => {
-          console.log(response)
-        },
-        (error) => {
-          console.log(error)
-        })
+      this.$auth.loginWith('local',{
+      data: {
+          email: this.email,
+          password: this.password
+        }
+      }).then((response) => {
+        console.log(response)
+      },
+      (error) => {
+        console.log(error)
+      })
     },
   }
 };

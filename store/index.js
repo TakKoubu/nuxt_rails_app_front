@@ -5,7 +5,7 @@ import Cookie from "js-cookie";
 
 Vue.use(Vuex);
 
-const url = 'http://localhost:3000/api/users';
+const url = 'http://localhost:5000/api/users';
 
 const createStore = () => {
   return new Vuex.Store({
@@ -38,7 +38,7 @@ const createStore = () => {
       },
       authenticateUser(vuexContext, authData) {
         let authUrl =
-          "http://localhost:3000/api/users" 
+          "http://localhost:5000/api/users" 
         if (!authData.isLogin) {
           authUrl = url
         }
