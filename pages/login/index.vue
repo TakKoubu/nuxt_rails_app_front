@@ -1,11 +1,11 @@
 <template>
   <div class="admin-auth-page">
     <div class="auth-container">
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="login">
         <AppControlInput type="email" v-model="email">E-Mail</AppControlInput>
         <AppControlInput type="password" v-model="password">Password</AppControlInput>
         <AppControlInput type="password" v-model="password_confirmation">(確認用)Password</AppControlInput>
-        <AppButton type="submit">Sign Up</AppButton>
+        <AppButton type="submit">Login</AppButton>
       </form>
     </div>
   </div>
@@ -23,15 +23,19 @@ export default {
     };
   },
   methods: {
-    onSubmit() {
-      this.$store.dispatch("authenticateUser", {
-        email: this.email,
-        password: this.password
+    login() {
+      this.$auth.loginWith('local',{
+        data: {
+          email: this.email,
+          password: this.password
+        }
+      }).then((response) => {
+        console.log(response)
+      },
+      (error) => {
+        console.log(error)
       })
-      .then(() => {
-        this.$router.push('/user');
-      });
-    }
+    },
   }
 };
 </script>
