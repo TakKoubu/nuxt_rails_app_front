@@ -4,23 +4,32 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+const url = 'http://localhost:5000/api/users';
+
 const createStore = () => {
   return new Vuex.Store({
-    api: 'http://localhost:3000/api',
     state: {
-      users: []
     },
     getters: {
       users: state => state.users
     },
     mutations: {
-      setUsers: (state, users) => (state.users = users)
     },
     actions: {
-      async fetchUsers({ commit }) {
-        const response = await axios.get(`${api}/users`);
-        commit('setUsers', response.data);
-      }
+      authenticateUser(vuexContext, authData) {
+        let authUrl =
+          "http://localhost:5000/api/users" 
+        if (!authData.isLogin) {
+          authUrl = url
+        }
+        return this.$axios
+          .$post(authUrl, { user: {
+            email: authData.email,
+            password: authData.password,
+            password_confirmation: authData.password_confirmation}
+          })
+          .catch(e => console.log(e));
+      },
     }
   })
 }
