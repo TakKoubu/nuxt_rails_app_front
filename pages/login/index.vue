@@ -4,7 +4,6 @@
       <form @submit.prevent="login">
         <AppControlInput type="email" v-model="email">E-Mail</AppControlInput>
         <AppControlInput type="password" v-model="password">Password</AppControlInput>
-        <AppControlInput type="password" v-model="password_confirmation">(確認用)Password</AppControlInput>
         <AppButton type="submit">Login</AppButton>
       </form>
     </div>
