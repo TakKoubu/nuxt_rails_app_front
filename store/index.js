@@ -16,7 +16,7 @@ const createStore = () => {
     mutations: {
     },
     actions: {
-      authenticateUser(_, authData) {
+      authenticateUser(vuexContext, authData) {
         let authUrl =
           "http://localhost:5000/api/users" 
         if (!authData.isLogin) {
