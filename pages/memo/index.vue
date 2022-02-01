@@ -3,10 +3,8 @@
     <section class="new-post">
       <!-- <AppButton @click="$router.push('/admin/new-post')">Create Post</AppButton> -->
       <AppButton style="margin-left: 10px" @click="onLogout">Logout</AppButton>
-    </section>
-    <section class="existing-posts">
       <h1>Existing Posts</h1>
-      <h2>{{ user.email }}</h2>
+      <MemoList :memos="loadedMemos" />
     </section>
   </div>
 </template>
@@ -19,6 +17,9 @@ export default {
     user() {
       console.log(this.$auth)
       return this.$auth.user;
+    },
+    loadedMemos() {
+      return this.$store.getters.loadedMemos
     }
   },
   methods: {
