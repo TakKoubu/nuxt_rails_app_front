@@ -6,6 +6,7 @@
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
+      <h2>{{ user.email }}</h2>
     </section>
   </div>
 </template>
@@ -15,6 +16,10 @@ export default {
   layout: "default",
   middleware: ["auth"],
   computed: {
+    user() {
+      console.log(this.$auth)
+      return this.$auth.user;
+    }
   },
   methods: {
     onLogout() {
