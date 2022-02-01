@@ -24,9 +24,7 @@ export default {
 }
 </script>
 
-
 <style scoped>
-
 .post-list {
   display: flex;
   padding: 20px;

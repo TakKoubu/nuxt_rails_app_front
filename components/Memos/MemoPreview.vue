@@ -3,6 +3,13 @@
     <article>
       <div class="post-content">
         <h1>{{ content }}</h1>
+        <AppButton
+          type="button"
+          style="margin-left: 10px"
+          btn-style="cancel"
+          @click="onDelete">
+          Delete
+        </AppButton>
       </div>
     </article>
   </div>
@@ -11,9 +18,14 @@
 <script>
 
 export default {
-  data(){
-    return{
-    }
+  data() {
+    return {
+      editedMemo: this.memo
+        ? { ...this.memo }
+        : {
+            content: "",
+          }
+    };
   },
   name: 'MemoPreview',
   props: {
@@ -29,6 +41,9 @@ export default {
   computed: {
   },
   methods: {
+    OnDelete(){
+      this.$emit('delete', this.editedMemo)
+    }
   }
 }
 </script>
@@ -62,7 +77,7 @@ a {
 }
 
 .post-content {
-  display: inline-block;
+  display: block;
   padding: 10px;
   text-align: center;
 }

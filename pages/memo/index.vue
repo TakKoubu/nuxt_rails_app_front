@@ -3,6 +3,7 @@
     <section class="new-post">
       <!-- <AppButton @click="$router.push('/admin/new-post')">Create Post</AppButton> -->
       <AppButton style="margin-left: 10px" @click="onLogout">Logout</AppButton>
+      <AppButton style="margin-left: 10px" @click="auto_login()">User 情報</AppButton>
       <h1>Existing Posts</h1>
       <MemoList :memos="loadedMemos" />
     </section>
@@ -26,6 +27,12 @@ export default {
     onLogout() {
       this.$auth.logout();
       this.$router.push("/login");
+    },
+    auto_login () {
+      const ret = this.$axios.$get('http://localhost:5000/api/auto_login',
+          { headers:{"Authorization" :`Bearer ${localStorage.idToken}`
+      }})
+      console.log(localStorage)
     }
   }
 };
