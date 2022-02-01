@@ -21,6 +21,9 @@ const createStore = () => {
             setMemos(state, memos) {
                 state.loadedMemos = memos;
             },
+            deleteMemo(state, id) {
+                state.loadedMemos.slice(id, 1);
+            },
         },
         actions: {
             nuxtServerInit(vuexContext, context) {
@@ -48,6 +51,17 @@ const createStore = () => {
                             password: authData.password,
                             password_confirmation: authData.password_confirmation
                         }
+                    })
+                    .catch(e => console.log(e));
+            },
+            deleteMemo(vuexContext, id) {
+                console.log(id)
+                return this.$axios
+                    .$delete(
+                        "http://localhost:5000/api/memos/" + id
+                    )
+                    .then(res => {
+                        vuexContext.commit("deleteMemo", id);
                     })
                     .catch(e => console.log(e));
             },

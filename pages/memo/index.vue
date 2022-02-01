@@ -16,7 +16,6 @@ export default {
   middleware: ["auth"],
   computed: {
     user() {
-      console.log(this.$auth)
       return this.$auth.user;
     },
     loadedMemos() {

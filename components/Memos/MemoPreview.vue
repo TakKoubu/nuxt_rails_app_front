@@ -7,7 +7,7 @@
           type="button"
           style="margin-left: 10px"
           btn-style="cancel"
-          @click="onDelete">
+          @click="onDelete(id)">
           Delete
         </AppButton>
       </div>
@@ -41,8 +41,8 @@ export default {
   computed: {
   },
   methods: {
-    OnDelete(){
-      this.$emit('delete', this.editedMemo)
+    onDelete(id){
+      this.$store.dispatch('deleteMemo', id)
     }
   }
 }
