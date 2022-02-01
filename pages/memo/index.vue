@@ -6,18 +6,24 @@
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
+      <h2>{{ user }}</h2>
     </section>
   </div>
 </template>
 
 <script>
 export default {
+  data() {
+    user = ""
+  },
   layout: "default",
   middleware: ["auth"],
   computed: {
+    
   },
   methods: {
     onLogout() {
+      console.log(this.$auth.user)
       this.$auth.logout();
       this.$router.push("/login");
     }
