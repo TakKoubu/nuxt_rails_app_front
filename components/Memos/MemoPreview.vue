@@ -7,7 +7,8 @@
           type="button"
           style="margin-left: 10px"
           btn-style="cancel"
-          @click="onDelete(id)">
+          @click="onDelete(id)"
+        >
           Delete
         </AppButton>
       </div>
@@ -16,7 +17,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -24,28 +24,28 @@ export default {
         ? { ...this.memo }
         : {
             content: "",
-          }
+          },
     };
   },
-  name: 'MemoPreview',
+  name: "MemoPreview",
   props: {
     id: {
       type: String,
-      required: true
+      required: true,
     },
     content: {
       type: String,
-      required: true
-    }, 
+      required: true,
+    },
   },
-  computed: {
-  },
+  computed: {},
   methods: {
-    onDelete(id){
-      this.$store.dispatch('deleteMemo', id)
-    }
-  }
-}
+    onDelete(id) {
+      console.log("test", id);
+      this.$store.dispatch("deleteMemo", id);
+    },
+  },
+};
 </script>
 
 
