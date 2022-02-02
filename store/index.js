@@ -21,8 +21,17 @@ const createStore = () => {
       setMemos(state, memos) {
         state.loadedMemos = memos;
       },
+      // deleteMemo(state, id) {
+      //   state.loadedMemos.splice(id, 1);
+      // },
       deleteMemo(state, id) {
-        state.loadedMemos.slice(id, 1);
+        state.loadedMemos.forEach(() => {
+          const index = state.loadedMemos.findIndex((v) => v.id === id);
+          state.loadedMemos.splice(index,1);
+        });
+      },
+      addMemo(state, memo) {
+        state.loadedMemos.push(memo);
       },
     },
     actions: {
@@ -30,12 +39,11 @@ const createStore = () => {
         return context.app.$axios
           .$get("http://localhost:5000/api/memos")
           .then(data => {
-            const memosArray = [];
-            console.log(data)
-            for (const key in data) {
-              memosArray.push({...data[key], id: key });
-            }
-            vuexContext.commit("setMemos", memosArray);
+            // const memosArray = [];
+            // for (const key in data) {
+            //   memosArray.push({...data[key], id: key });
+            // }
+            vuexContext.commit("setMemos", data);
           })
           .catch(e => context.error(e));
       },
@@ -63,6 +71,21 @@ const createStore = () => {
           )
           .then(res => {
             vuexContext.commit("deleteMemo", id);
+          })
+          .catch(e => console.log(e));
+      },
+      addMemo(vuexContext, memo) {
+        const createdMemo = {
+          ...memo,
+          updatedDate: new Date()
+        };
+        return this.$axios
+          .$post(
+            "http://localhost:5000/api/memos",
+            createdMemo
+          )
+          .then(data => {
+            vuexContext.commit("addMemo", { ...createdMemo, id: data.name });
           })
           .catch(e => console.log(e));
       },

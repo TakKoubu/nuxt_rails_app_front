@@ -30,7 +30,7 @@ export default {
   name: "MemoPreview",
   props: {
     id: {
-      type: String,
+      type: Number,
       required: true,
     },
     content: {
@@ -41,7 +41,6 @@ export default {
   computed: {},
   methods: {
     onDelete(id) {
-      console.log("test", id);
       this.$store.dispatch("deleteMemo", id);
     },
   },
