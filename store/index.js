@@ -87,6 +87,17 @@ const createStore = () => {
           })
           .catch(e => console.log(e));
       },
+      addLike(vuexContext, id) {
+        const index = vuexContext.state.loadedMemos.findIndex((v) => v.id === id);
+        const memo = vuexContext.state.loadedMemos[index]
+        console.log(memo)
+        return this.$axios
+        .$post(
+          "http://localhost:5000/api/favorites",
+          {favorite: {id: id, user_id: 1}}
+        )
+        .catch(e => console.log(e));
+      },
     }
   })
 }
