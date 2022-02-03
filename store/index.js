@@ -25,10 +25,8 @@ const createStore = () => {
       //   state.loadedMemos.splice(id, 1);
       // },
       deleteMemo(state, id) {
-        state.loadedMemos.forEach(() => {
-          const index = state.loadedMemos.findIndex((v) => v.id === id);
-          state.loadedMemos.splice(index,1);
-        });
+        const index = state.loadedMemos.findIndex((v) => v.id === id);
+        state.loadedMemos.splice(index,1);
       },
       addMemo(state, memo) {
         state.loadedMemos.push(memo);
@@ -75,17 +73,16 @@ const createStore = () => {
           .catch(e => console.log(e));
       },
       addMemo(vuexContext, memo) {
-        const createdMemo = {
-          ...memo,
-          updatedDate: new Date()
-        };
+        // const Memo = {
+        //   ...memo,
+        // };
         return this.$axios
           .$post(
             "http://localhost:5000/api/memos",
-            createdMemo
+            memo
           )
           .then(data => {
-            vuexContext.commit("addMemo", { ...createdMemo, id: data.name });
+            vuexContext.commit("addMemo", { memo, id: data.id });
           })
           .catch(e => console.log(e));
       },
