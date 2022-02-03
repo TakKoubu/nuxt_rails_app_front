@@ -82,7 +82,8 @@ const createStore = () => {
             memo
           )
           .then(data => {
-            vuexContext.commit("addMemo", { memo, id: data.id });
+            console.log({ memo, id: data.id })
+            vuexContext.commit("addMemo",  data );
           })
           .catch(e => console.log(e));
       },
