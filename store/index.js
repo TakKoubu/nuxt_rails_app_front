@@ -83,14 +83,11 @@ const createStore = () => {
           )
           .then(data => {
             console.log({ memo, id: data.id })
-            vuexContext.commit("addMemo",  data );
+            vuexContext.commit("addMemo", data);
           })
           .catch(e => console.log(e));
       },
-      addLike(vuexContext, id) {
-        const index = vuexContext.state.loadedMemos.findIndex((v) => v.id === id);
-        const memo = vuexContext.state.loadedMemos[index]
-        console.log(memo)
+      addLike(_, id) {
         return this.$axios
         .$post(
           "http://localhost:5000/api/favorites",
