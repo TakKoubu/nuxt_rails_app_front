@@ -5,7 +5,7 @@
       :key="memo.id"
       :id="memo.id"
       :content="memo.content"
-      :like="memo.like"
+      :goodwill_count="memo.goodwill_count"
     />
   </section>
 </template>

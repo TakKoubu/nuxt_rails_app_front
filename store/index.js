@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -14,7 +13,7 @@ const createStore = () => {
     getters: {
       users: state => state.users,
       loadedMemos(state) {
-          return state.loadedMemos;
+        return state.loadedMemos;
       },
     },
     mutations: {
@@ -31,6 +30,13 @@ const createStore = () => {
       addMemo(state, memo) {
         state.loadedMemos.push(memo);
       },
+      addLike(state, id) {
+        const index = state.loadedMemos.findIndex(
+          memo => memo.id === id
+        );
+        const Memo = state.loadedMemos[index]
+        Memo.goodwill_count++
+      }
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
@@ -62,7 +68,6 @@ const createStore = () => {
           .catch(e => console.log(e));
       },
       deleteMemo(vuexContext, id) {
-        console.log(id)
         return this.$axios
           .$delete(
             "http://localhost:5000/api/memos/" + id
@@ -82,16 +87,18 @@ const createStore = () => {
             memo
           )
           .then(data => {
-            console.log({ memo, id: data.id })
             vuexContext.commit("addMemo", data);
           })
           .catch(e => console.log(e));
       },
-      addLike(_, id) {
+      addLike(vuexContext, id) {
         return this.$axios
         .$post(
-          "http://localhost:5000/api/favorites",
-          {favorite: {id: id, user_id: 1}}
+          "http://localhost:5000/api/goodwills",
+          {like_id: id}
+        )
+        .then(
+          vuexContext.commit('addLike', id)
         )
         .catch(e => console.log(e));
       },
