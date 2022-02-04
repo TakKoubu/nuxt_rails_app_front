@@ -11,6 +11,9 @@
         >
           Delete
         </AppButton>
+        <AppButton type="button" style="margin-left: 10px" @click="addLike(id)">
+          {{ like }}いいね
+        </AppButton>
       </div>
     </article>
   </div>
@@ -24,6 +27,7 @@ export default {
         ? { ...this.memo }
         : {
             content: "",
+            like: 0,
           },
     };
   },
@@ -37,11 +41,17 @@ export default {
       type: String,
       required: true,
     },
+    like: {
+      type: Number,
+    },
   },
   computed: {},
   methods: {
     onDelete(id) {
       this.$store.dispatch("deleteMemo", id);
+    },
+    addLike(id) {
+      this.$store.dispatch("addLike", id);
     },
   },
 };

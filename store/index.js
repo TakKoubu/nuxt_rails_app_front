@@ -25,10 +25,8 @@ const createStore = () => {
       //   state.loadedMemos.splice(id, 1);
       // },
       deleteMemo(state, id) {
-        state.loadedMemos.forEach(() => {
-          const index = state.loadedMemos.findIndex((v) => v.id === id);
-          state.loadedMemos.splice(index,1);
-        });
+        const index = state.loadedMemos.findIndex((v) => v.id === id);
+        state.loadedMemos.splice(index,1);
       },
       addMemo(state, memo) {
         state.loadedMemos.push(memo);
@@ -75,19 +73,27 @@ const createStore = () => {
           .catch(e => console.log(e));
       },
       addMemo(vuexContext, memo) {
-        const createdMemo = {
-          ...memo,
-          updatedDate: new Date()
-        };
+        // const Memo = {
+        //   ...memo,
+        // };
         return this.$axios
           .$post(
             "http://localhost:5000/api/memos",
-            createdMemo
+            memo
           )
           .then(data => {
-            vuexContext.commit("addMemo", { ...createdMemo, id: data.name });
+            console.log({ memo, id: data.id })
+            vuexContext.commit("addMemo", data);
           })
           .catch(e => console.log(e));
+      },
+      addLike(_, id) {
+        return this.$axios
+        .$post(
+          "http://localhost:5000/api/favorites",
+          {favorite: {id: id, user_id: 1}}
+        )
+        .catch(e => console.log(e));
       },
     }
   })

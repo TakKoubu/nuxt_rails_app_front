@@ -4,24 +4,26 @@
       v-for="memo in memos"
       :key="memo.id"
       :id="memo.id"
-      :content="memo.content" />
+      :content="memo.content"
+      :like="memo.like"
+    />
   </section>
 </template>
 
 <script>
-import MemoPreview from '@/components/Memos/MemoPreview'
+import MemoPreview from "@/components/Memos/MemoPreview";
 
 export default {
   components: {
-    MemoPreview
+    MemoPreview,
   },
   props: {
     memos: {
       type: Array,
-      required: true
-    }
-  }
-}
+      required: true,
+    },
+  },
+};
 </script>
 
 <style scoped>
