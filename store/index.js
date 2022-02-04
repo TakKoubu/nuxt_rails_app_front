@@ -95,7 +95,7 @@ const createStore = () => {
         return this.$axios
         .$post(
           "http://localhost:5000/api/goodwills",
-          {like_id: id, user_id: 1}
+          {memo_id: id, user_id: 1}
         )
         .then(
           vuexContext.commit('addLike', id)
