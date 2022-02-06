@@ -35,7 +35,7 @@ const createStore = () => {
           memo => memo.id === id
         );
         const memo = state.loadedMemos[index]
-        memo.goodwillCount =+ 1
+        memo.goodwill_count =+ 1
       }
     },
     actions: {
