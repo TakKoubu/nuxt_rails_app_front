@@ -1,4 +1,3 @@
-import axios from 'axios';
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -14,7 +13,7 @@ const createStore = () => {
     getters: {
       users: state => state.users,
       loadedMemos(state) {
-          return state.loadedMemos;
+        return state.loadedMemos;
       },
     },
     mutations: {
@@ -31,23 +30,25 @@ const createStore = () => {
       addMemo(state, memo) {
         state.loadedMemos.push(memo);
       },
+      addLike(state, id) {
+        const index = state.loadedMemos.findIndex(
+          memo => memo.id === id
+        );
+        const memo = state.loadedMemos[index]
+        memo.goodwill_count =+ 1
+      }
     },
     actions: {
       nuxtServerInit(vuexContext, context) {
         return context.app.$axios
           .$get("http://localhost:5000/api/memos")
           .then(data => {
-            // const memosArray = [];
-            // for (const key in data) {
-            //   memosArray.push({...data[key], id: key });
-            // }
             vuexContext.commit("setMemos", data);
           })
           .catch(e => context.error(e));
       },
       authenticateUser(_, authData) {
-        let authUrl =
-          "http://localhost:5000/api/users"
+        let authUrl = "http://localhost:5000/api/users"
         if (!authData.isLogin) {
           authUrl = url
         }
@@ -62,7 +63,6 @@ const createStore = () => {
           .catch(e => console.log(e));
       },
       deleteMemo(vuexContext, id) {
-        console.log(id)
         return this.$axios
           .$delete(
             "http://localhost:5000/api/memos/" + id
@@ -73,27 +73,26 @@ const createStore = () => {
           .catch(e => console.log(e));
       },
       addMemo(vuexContext, memo) {
-        // const Memo = {
-        //   ...memo,
-        // };
         return this.$axios
           .$post(
             "http://localhost:5000/api/memos",
             memo
           )
           .then(data => {
-            console.log({ memo, id: data.id })
             vuexContext.commit("addMemo", data);
           })
           .catch(e => console.log(e));
       },
-      addLike(_, id) {
+      addLike(vuexContext, id) {
         return this.$axios
-        .$post(
-          "http://localhost:5000/api/favorites",
-          {favorite: {id: id, user_id: 1}}
-        )
-        .catch(e => console.log(e));
+          .$post(
+            "http://localhost:5000/api/goodwills",
+            {memo_id: id, user_id: 1}
+          )
+          .then(
+            vuexContext.commit('addLike', id)
+          )
+          .catch(e => console.log(e));
       },
     }
   })

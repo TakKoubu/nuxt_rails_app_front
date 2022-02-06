@@ -33,7 +33,6 @@ export default {
       const ret = this.$axios.$get("http://localhost:5000/api/auto_login", {
         headers: { Authorization: `Bearer ${localStorage.idToken}` },
       });
-      console.log(localStorage);
     },
   },
 };

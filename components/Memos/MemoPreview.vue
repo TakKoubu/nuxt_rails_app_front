@@ -12,7 +12,7 @@
           Delete
         </AppButton>
         <AppButton type="button" style="margin-left: 10px" @click="addLike(id)">
-          {{ like }}いいね
+          {{ goodwill_count }}いいね
         </AppButton>
       </div>
     </article>
@@ -27,7 +27,6 @@ export default {
         ? { ...this.memo }
         : {
             content: "",
-            like: 0,
           },
     };
   },
@@ -41,7 +40,7 @@ export default {
       type: String,
       required: true,
     },
-    like: {
+    goodwill_count: {
       type: Number,
     },
   },
