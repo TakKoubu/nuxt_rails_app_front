@@ -34,8 +34,8 @@ const createStore = () => {
         const index = state.loadedMemos.findIndex(
           memo => memo.id === id
         );
-        const Memo = state.loadedMemos[index]
-        Memo.goodwill_count++
+        const memo = state.loadedMemos[index]
+        memo.goodwillCount =+ 1
       }
     },
     actions: {
@@ -43,17 +43,12 @@ const createStore = () => {
         return context.app.$axios
           .$get("http://localhost:5000/api/memos")
           .then(data => {
-            // const memosArray = [];
-            // for (const key in data) {
-            //   memosArray.push({...data[key], id: key });
-            // }
             vuexContext.commit("setMemos", data);
           })
           .catch(e => context.error(e));
       },
       authenticateUser(_, authData) {
-        let authUrl =
-          "http://localhost:5000/api/users"
+        let authUrl = "http://localhost:5000/api/users"
         if (!authData.isLogin) {
           authUrl = url
         }
@@ -78,9 +73,6 @@ const createStore = () => {
           .catch(e => console.log(e));
       },
       addMemo(vuexContext, memo) {
-        // const Memo = {
-        //   ...memo,
-        // };
         return this.$axios
           .$post(
             "http://localhost:5000/api/memos",
@@ -93,14 +85,14 @@ const createStore = () => {
       },
       addLike(vuexContext, id) {
         return this.$axios
-        .$post(
-          "http://localhost:5000/api/goodwills",
-          {memo_id: id, user_id: 1}
-        )
-        .then(
-          vuexContext.commit('addLike', id)
-        )
-        .catch(e => console.log(e));
+          .$post(
+            "http://localhost:5000/api/goodwills",
+            {memo_id: id, user_id: 1}
+          )
+          .then(
+            vuexContext.commit('addLike', id)
+          )
+          .catch(e => console.log(e));
       },
     }
   })
